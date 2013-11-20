@@ -1,0 +1,27 @@
+/* line 1, ../sass/site.scss */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 2, ../sass/site.scss */
+body {
+  color: White;
+}
+
+/* line 6, ../sass/site.scss */
+.menu {
+  position: absolute;
+  width: 100%;
+}
+
+/* line 11, ../sass/site.scss */
+.FluidHero .Images {
+  height: 100%;
+  overflow: hidden;
+}
+/* line 15, ../sass/site.scss */
+.FluidHero .Images img {
+  width: 100%;
+}
