@@ -1,0 +1,46 @@
+@import "compass/css3";
+
+html, body { height:100%; margin:0; padding: 0; }
+body {
+    
+}
+
+.menu {
+    position:absolute;
+    width:100%;
+}
+.FluidHero {
+    .HeroImage {
+        height:auto;
+        overflow:hidden;
+    }
+
+}
+
+.WhatWeDo {
+    $roundboxsize: 220px;
+    .circleframe {
+        background:$primary-color;
+        color:White;
+        height: $roundboxsize;
+        width: 100%;
+        padding: $roundboxsize / 3.5;
+        text-align:center;
+        @include radius(600px);
+        
+    }
+    .text {
+        margin-top:20px;
+        text-align:justify;
+        
+        -ms-word-break: break-all;
+         word-break: break-all;
+         -moz-hyphens: auto;
+         -webkit-hyphens: auto;
+         hyphens: auto;
+            
+    }
+    
+}
+
+.darkgrey { background:#e9e9e9; }

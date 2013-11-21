@@ -9,8 +9,8 @@
     <title>Foundation 4</title>
 
   
-    <link rel="stylesheet" href="Content/stylesheets/app.css">
-    <link rel="stylesheet" href="Content/stylesheets/site.css">
+    <link rel="stylesheet" href="Content/stylesheets/foundation.css">
+    
     <link rel="stylesheet" href="Content/stylesheets/font-aweosme/font-awesome.css">
     <script src="Scripts/vendor/custom.modernizr.js"></script>
 
@@ -19,25 +19,43 @@
 <body>
     <header class="menu">
         <div class="row">
-            <img src="Content/images/Logo.png" />
-            <nav>
-                <ul class="">
-                    <li><a href="#">Forside</a></li>
+            <nav class="top-bar">
+              <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                  <h1><a href="#"><img src="Content/images/Logo.png" /></a></h1>
+                </li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+              </ul>
+            
+              <section class="top-bar-section">
+                <!-- Left Nav Section -->
+                <ul class="right">
+                  
+                    <li class="active"><a href="#">Forside</a></li>
                     <li><a href="#">Nyheder</a></li>
                     <li><a href="#">Om Form Works</a></li>
                     <li><a href="#">Projekter</a></li>
                     <li><a href="#">Galleri</a></li>
                     <li><a href="#">Kontakt</a></li>
-                    
-                    <i class="fa fa-flag"></i>
+                    <li class="has-dropdown"><a href="#">Ansatte</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Dan Verbaum</a></li>
+                            <li><a href="#">John P. Herluf</a></li>
+                            <li><a href="#">Niels Hoy Hansen</a></li>
+                        </ul>
+                    </li>
                 </ul>
+                </section>
             </nav>
         </div>
     </header>
     
-    <div class="FluidHero">
+    <!-- Hero Section -->
+    <section class="FluidHero">
         
-        <img class="HeroImage" src="Content/images/HeroImage.png" />
+        <img class="HeroImage" src="Content/images/HeroImage-2.png" />
         <div class="row">
             <div class="large-12 columns">
                 <div class="row">
@@ -45,8 +63,88 @@
                 </div>
              </div>
         </div>
-    </div>
+    </section>
     
+    <!-- WhatWeDo Section -->
+    <section class="row WhatWeDo">
+        <div class="large-12 columns">
+            <h3 class="center text-center">Vi kan tilbyde design af alle former for bygninger, lige fra nye til renovering af gamle lejligheder.</h3>
+        </div>
+        <div class="large-3 columns">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="round circleframe">
+                        <i class="fa fa-building-o fa-5x"></i>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <p class="text">
+                        Form Work startede op som et freelance projekt da de 3 tilfældigt mødtes for 4 år siden, i forbindelse med Verdensudstillingen.
+                    </p>
+                </div>
+            </div>
+        </div>
+         <div class="large-3 columns">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="round circleframe">
+                        <i class="fa fa-tachometer fa-5x"></i>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <p class=" text">
+                        Vi er i højsædet når det gælder effiktivitet, hos Form Works, gælder det om og få vores kunder tilfredse, dette gør vi ved at levere et enestående resultat.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="large-3 columns">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="round circleframe">
+                        <i class="fa fa-thumbs-o-up fa-5x"></i>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <p class="text">
+                        Form Work arbejder på at blive langt mere kendt i Danmark for sine alternative og altid kreative løsninger, med smukt brugervenligt design som man ikke blot skal bo i, men leve i.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="large-3 columns">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="round circleframe">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <p class="text">
+                        Samarbejde er vigtigt, hos Form Work gør vi alt hvad vi kan for at få det bedste samarbejde op og stå med vores kunder, og derved bibeholder kontakten til dem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- News Section -->
+      <section class="news darkgrey">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <img src="Content/images/News1.png" />
+                    </div>
+                    <div class="large-6 columns">
+                    <p>Partner i Form Works, Dan verbaum som jury</p>
+                    <p><i>Dan Verbaum er af The sixt European Biennial of Landscape Architecture of Barcelona</i> blevet inviteret som medlem af den  Internationale Jury, som skal vælge finalister til den præstigefyldte Rosa Barba Price. Den 6. udgave af biennalen foregår i Barcelona først i Oktober 2010.  Form Work er sammen med det øvrige rådgiverteam fuldt igang med programmerings fasen og udvidet dispositionsforslag forventes færdigt ultimo februar 2010.  De nye campus arealer ved Struer Gymnasium og Struer Museum skal til at tage form. Ude arealerne forventes at stå helt færdige i foråret 2010...  [+] Læs mere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </section>
 	<div class="row">
 		<div class="large-12 columns">
 			<h2>Welcome to Foundation</h2>
