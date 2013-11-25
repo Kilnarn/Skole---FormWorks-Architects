@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FormWorkArchitectsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="FormWorkArchitectsModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="FormWorkArchitectsModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CategoriesInPosts" EntityType="FormWorkArchitectsModel.Store.CategoriesInPosts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="City" EntityType="FormWorkArchitectsModel.Store.City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="General" EntityType="FormWorkArchitectsModel.Store.General" store:Type="Tables" store:Schema="dbo" store:Name="General">
+            <DefiningQuery>SELECT 
+      [General].[SiteName] AS [SiteName], 
+      [General].[Email] AS [Email], 
+      [General].[Phone] AS [Phone], 
+      [General].[Address] AS [Address], 
+      [General].[FK_City] AS [FK_City]
+      FROM [dbo].[General] AS [General]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Pages" EntityType="FormWorkArchitectsModel.Store.Pages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Posts" EntityType="FormWorkArchitectsModel.Store.Posts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PostType" EntityType="FormWorkArchitectsModel.Store.PostType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="FormWorkArchitectsModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="FormWorkArchitectsModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tags" EntityType="FormWorkArchitectsModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TagsInPosts" EntityType="FormWorkArchitectsModel.Store.TagsInPosts" store:Type="Tables" store:Schema="dbo" store:Name="TagsInPosts">
+            <DefiningQuery>SELECT 
+      [TagsInPosts].[Id] AS [Id], 
+      [TagsInPosts].[FK_Tag] AS [FK_Tag], 
+      [TagsInPosts].[FK_Posts] AS [FK_Posts]
+      FROM [dbo].[TagsInPosts] AS [TagsInPosts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserProfile" EntityType="FormWorkArchitectsModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="FormWorkArchitectsModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="FormWorkArchitectsModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="FormWorkArchitectsModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="FormWorkArchitectsModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Categories_PostType" Association="FormWorkArchitectsModel.Store.FK_Categories_PostType">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriesInPosts_Categories" Association="FormWorkArchitectsModel.Store.FK_CategoriesInPosts_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoriesInPosts" EntitySet="CategoriesInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriesInPosts_Posts" Association="FormWorkArchitectsModel.Store.FK_CategoriesInPosts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="CategoriesInPosts" EntitySet="CategoriesInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_General_City" Association="FormWorkArchitectsModel.Store.FK_General_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="General" EntitySet="General" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Pages" Association="FormWorkArchitectsModel.Store.FK_Pages_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Pages1" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Status" Association="FormWorkArchitectsModel.Store.FK_Pages_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_PostType" Association="FormWorkArchitectsModel.Store.FK_Posts_PostType">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Status" Association="FormWorkArchitectsModel.Store.FK_Posts_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="FormWorkArchitectsModel.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsInPosts_Posts" Association="FormWorkArchitectsModel.Store.FK_TagsInPosts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="TagsInPosts" EntitySet="TagsInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsInPosts_Tags" Association="FormWorkArchitectsModel.Store.FK_TagsInPosts_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="TagsInPosts" EntitySet="TagsInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="FormWorkArchitectsModel.Store.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FK_Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoriesInPosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Categories" Type="int" Nullable="false" />
+          <Property Name="FK_Posts" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'FormWorkArchitects.dbo.General' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="General">
+          <Key>
+            <PropertyRef Name="SiteName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="FK_City" />
+          </Key>
+          <Property Name="SiteName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FK_City" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FK_Status" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="SortIndex" Type="int" Nullable="false" />
+          <Property Name="FK_Parent" Type="int" />
+          <Property Name="FK_User" Type="int" Nullable="false" />
+          <Property Name="SEO_KeyWords" Type="nvarchar" MaxLength="255" />
+          <Property Name="SEO_Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="FK_Type" Type="int" Nullable="false" />
+          <Property Name="FK_User" Type="int" Nullable="false" />
+          <Property Name="SEO_KeyWords" Type="nvarchar" MaxLength="255" />
+          <Property Name="SEO_Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="FK_Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'FormWorkArchitects.dbo.TagsInPosts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="TagsInPosts">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FK_Tag" />
+            <PropertyRef Name="FK_Posts" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Tag" Type="int" Nullable="false" />
+          <Property Name="FK_Posts" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Categories_PostType">
+          <End Role="PostType" Type="FormWorkArchitectsModel.Store.PostType" Multiplicity="1" />
+          <End Role="Categories" Type="FormWorkArchitectsModel.Store.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="FK_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriesInPosts_Categories">
+          <End Role="Categories" Type="FormWorkArchitectsModel.Store.Categories" Multiplicity="1" />
+          <End Role="CategoriesInPosts" Type="FormWorkArchitectsModel.Store.CategoriesInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriesInPosts">
+              <PropertyRef Name="FK_Categories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriesInPosts_Posts">
+          <End Role="Posts" Type="FormWorkArchitectsModel.Store.Posts" Multiplicity="1" />
+          <End Role="CategoriesInPosts" Type="FormWorkArchitectsModel.Store.CategoriesInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriesInPosts">
+              <PropertyRef Name="FK_Posts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_General_City">
+          <End Role="City" Type="FormWorkArchitectsModel.Store.City" Multiplicity="1" />
+          <End Role="General" Type="FormWorkArchitectsModel.Store.General" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="General">
+              <PropertyRef Name="FK_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Pages">
+          <End Role="Pages" Type="FormWorkArchitectsModel.Store.Pages" Multiplicity="0..1" />
+          <End Role="Pages1" Type="FormWorkArchitectsModel.Store.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages1">
+              <PropertyRef Name="FK_Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Status">
+          <End Role="Status" Type="FormWorkArchitectsModel.Store.Status" Multiplicity="1" />
+          <End Role="Pages" Type="FormWorkArchitectsModel.Store.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="FK_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_PostType">
+          <End Role="PostType" Type="FormWorkArchitectsModel.Store.PostType" Multiplicity="1" />
+          <End Role="Posts" Type="FormWorkArchitectsModel.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FK_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Status">
+          <End Role="Status" Type="FormWorkArchitectsModel.Store.Status" Multiplicity="1" />
+          <End Role="Posts" Type="FormWorkArchitectsModel.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FK_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="FormWorkArchitectsModel.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="FormWorkArchitectsModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsInPosts_Posts">
+          <End Role="Posts" Type="FormWorkArchitectsModel.Store.Posts" Multiplicity="1" />
+          <End Role="TagsInPosts" Type="FormWorkArchitectsModel.Store.TagsInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsInPosts">
+              <PropertyRef Name="FK_Posts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsInPosts_Tags">
+          <End Role="Tags" Type="FormWorkArchitectsModel.Store.Tags" Multiplicity="1" />
+          <End Role="TagsInPosts" Type="FormWorkArchitectsModel.Store.TagsInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsInPosts">
+              <PropertyRef Name="FK_Tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="FormWorkArchitectsModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="FormWorkArchitectsModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FormWorkArchitectsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DAEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="FormWorkArchitectsModel.Categories" />
+          <EntitySet Name="CategoriesInPosts" EntityType="FormWorkArchitectsModel.CategoriesInPosts" />
+          <EntitySet Name="City" EntityType="FormWorkArchitectsModel.City" />
+          <EntitySet Name="General" EntityType="FormWorkArchitectsModel.General" />
+          <EntitySet Name="Pages" EntityType="FormWorkArchitectsModel.Pages" />
+          <EntitySet Name="Posts" EntityType="FormWorkArchitectsModel.Posts" />
+          <EntitySet Name="PostType" EntityType="FormWorkArchitectsModel.PostType" />
+          <EntitySet Name="Status" EntityType="FormWorkArchitectsModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="FormWorkArchitectsModel.sysdiagrams" />
+          <EntitySet Name="Tags" EntityType="FormWorkArchitectsModel.Tags" />
+          <EntitySet Name="TagsInPosts" EntityType="FormWorkArchitectsModel.TagsInPosts" />
+          <EntitySet Name="UserProfile" EntityType="FormWorkArchitectsModel.UserProfile" />
+          <EntitySet Name="webpages_Membership" EntityType="FormWorkArchitectsModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="FormWorkArchitectsModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="FormWorkArchitectsModel.webpages_Roles" />
+          <AssociationSet Name="FK_Categories_PostType" Association="FormWorkArchitectsModel.FK_Categories_PostType">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriesInPosts_Categories" Association="FormWorkArchitectsModel.FK_CategoriesInPosts_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CategoriesInPosts" EntitySet="CategoriesInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriesInPosts_Posts" Association="FormWorkArchitectsModel.FK_CategoriesInPosts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="CategoriesInPosts" EntitySet="CategoriesInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_General_City" Association="FormWorkArchitectsModel.FK_General_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="General" EntitySet="General" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Pages" Association="FormWorkArchitectsModel.FK_Pages_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Pages1" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_Status" Association="FormWorkArchitectsModel.FK_Pages_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_PostType" Association="FormWorkArchitectsModel.FK_Posts_PostType">
+            <End Role="PostType" EntitySet="PostType" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Status" Association="FormWorkArchitectsModel.FK_Posts_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsInPosts_Posts" Association="FormWorkArchitectsModel.FK_TagsInPosts_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="TagsInPosts" EntitySet="TagsInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsInPosts_Tags" Association="FormWorkArchitectsModel.FK_TagsInPosts_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="TagsInPosts" EntitySet="TagsInPosts" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="FormWorkArchitectsModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FK_Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PostType" Relationship="FormWorkArchitectsModel.FK_Categories_PostType" FromRole="Categories" ToRole="PostType" />
+          <NavigationProperty Name="CategoriesInPosts" Relationship="FormWorkArchitectsModel.FK_CategoriesInPosts_Categories" FromRole="Categories" ToRole="CategoriesInPosts" />
+        </EntityType>
+        <EntityType Name="CategoriesInPosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Categories" Type="Int32" Nullable="false" />
+          <Property Name="FK_Posts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="FormWorkArchitectsModel.FK_CategoriesInPosts_Categories" FromRole="CategoriesInPosts" ToRole="Categories" />
+          <NavigationProperty Name="Posts" Relationship="FormWorkArchitectsModel.FK_CategoriesInPosts_Posts" FromRole="CategoriesInPosts" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="General" Relationship="FormWorkArchitectsModel.FK_General_City" FromRole="City" ToRole="General" />
+        </EntityType>
+        <EntityType Name="General">
+          <Key>
+            <PropertyRef Name="SiteName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="FK_City" />
+          </Key>
+          <Property Name="SiteName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FK_City" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="FormWorkArchitectsModel.FK_General_City" FromRole="General" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FK_Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SortIndex" Type="Int32" Nullable="false" />
+          <Property Name="FK_Parent" Type="Int32" />
+          <Property Name="FK_User" Type="Int32" Nullable="false" />
+          <Property Name="SEO_KeyWords" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="SEO_Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pages1" Relationship="FormWorkArchitectsModel.FK_Pages_Pages" FromRole="Pages" ToRole="Pages1" />
+          <NavigationProperty Name="Pages2" Relationship="FormWorkArchitectsModel.FK_Pages_Pages" FromRole="Pages1" ToRole="Pages" />
+          <NavigationProperty Name="Status" Relationship="FormWorkArchitectsModel.FK_Pages_Status" FromRole="Pages" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_Type" Type="Int32" Nullable="false" />
+          <Property Name="FK_User" Type="Int32" Nullable="false" />
+          <Property Name="SEO_KeyWords" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="SEO_Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FK_Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriesInPosts" Relationship="FormWorkArchitectsModel.FK_CategoriesInPosts_Posts" FromRole="Posts" ToRole="CategoriesInPosts" />
+          <NavigationProperty Name="PostType" Relationship="FormWorkArchitectsModel.FK_Posts_PostType" FromRole="Posts" ToRole="PostType" />
+          <NavigationProperty Name="Status" Relationship="FormWorkArchitectsModel.FK_Posts_Status" FromRole="Posts" ToRole="Status" />
+          <NavigationProperty Name="TagsInPosts" Relationship="FormWorkArchitectsModel.FK_TagsInPosts_Posts" FromRole="Posts" ToRole="TagsInPosts" />
+        </EntityType>
+        <EntityType Name="PostType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Categories" Relationship="FormWorkArchitectsModel.FK_Categories_PostType" FromRole="PostType" ToRole="Categories" />
+          <NavigationProperty Name="Posts" Relationship="FormWorkArchitectsModel.FK_Posts_PostType" FromRole="PostType" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pages" Relationship="FormWorkArchitectsModel.FK_Pages_Status" FromRole="Status" ToRole="Pages" />
+          <NavigationProperty Name="Posts" Relationship="FormWorkArchitectsModel.FK_Posts_Status" FromRole="Status" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TagsInPosts" Relationship="FormWorkArchitectsModel.FK_TagsInPosts_Tags" FromRole="Tags" ToRole="TagsInPosts" />
+        </EntityType>
+        <EntityType Name="TagsInPosts">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FK_Tag" />
+            <PropertyRef Name="FK_Posts" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Tag" Type="Int32" Nullable="false" />
+          <Property Name="FK_Posts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="FormWorkArchitectsModel.FK_TagsInPosts_Posts" FromRole="TagsInPosts" ToRole="Posts" />
+          <NavigationProperty Name="Tags" Relationship="FormWorkArchitectsModel.FK_TagsInPosts_Tags" FromRole="TagsInPosts" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="FormWorkArchitectsModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfile" Relationship="FormWorkArchitectsModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Categories_PostType">
+          <End Role="PostType" Type="FormWorkArchitectsModel.PostType" Multiplicity="1" />
+          <End Role="Categories" Type="FormWorkArchitectsModel.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="FK_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriesInPosts_Categories">
+          <End Role="Categories" Type="FormWorkArchitectsModel.Categories" Multiplicity="1" />
+          <End Role="CategoriesInPosts" Type="FormWorkArchitectsModel.CategoriesInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriesInPosts">
+              <PropertyRef Name="FK_Categories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriesInPosts_Posts">
+          <End Role="Posts" Type="FormWorkArchitectsModel.Posts" Multiplicity="1" />
+          <End Role="CategoriesInPosts" Type="FormWorkArchitectsModel.CategoriesInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriesInPosts">
+              <PropertyRef Name="FK_Posts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_General_City">
+          <End Role="City" Type="FormWorkArchitectsModel.City" Multiplicity="1" />
+          <End Role="General" Type="FormWorkArchitectsModel.General" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="General">
+              <PropertyRef Name="FK_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Pages">
+          <End Role="Pages" Type="FormWorkArchitectsModel.Pages" Multiplicity="0..1" />
+          <End Role="Pages1" Type="FormWorkArchitectsModel.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages1">
+              <PropertyRef Name="FK_Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_Status">
+          <End Role="Status" Type="FormWorkArchitectsModel.Status" Multiplicity="1" />
+          <End Role="Pages" Type="FormWorkArchitectsModel.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="FK_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_PostType">
+          <End Role="PostType" Type="FormWorkArchitectsModel.PostType" Multiplicity="1" />
+          <End Role="Posts" Type="FormWorkArchitectsModel.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FK_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Status">
+          <End Role="Status" Type="FormWorkArchitectsModel.Status" Multiplicity="1" />
+          <End Role="Posts" Type="FormWorkArchitectsModel.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="FK_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsInPosts_Posts">
+          <End Role="Posts" Type="FormWorkArchitectsModel.Posts" Multiplicity="1" />
+          <End Role="TagsInPosts" Type="FormWorkArchitectsModel.TagsInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsInPosts">
+              <PropertyRef Name="FK_Posts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsInPosts_Tags">
+          <End Role="Tags" Type="FormWorkArchitectsModel.Tags" Multiplicity="1" />
+          <End Role="TagsInPosts" Type="FormWorkArchitectsModel.TagsInPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsInPosts">
+              <PropertyRef Name="FK_Tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="FormWorkArchitectsModel.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="FormWorkArchitectsModel.UserProfile" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FormWorkArchitectsModelStoreContainer" CdmEntityContainer="DAEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FK_Type" ColumnName="FK_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriesInPosts">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.CategoriesInPosts">
+              <MappingFragment StoreEntitySet="CategoriesInPosts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_Categories" ColumnName="FK_Categories" />
+                <ScalarProperty Name="FK_Posts" ColumnName="FK_Posts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="General">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.General">
+              <MappingFragment StoreEntitySet="General">
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FK_City" ColumnName="FK_City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="FK_Status" ColumnName="FK_Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+                <ScalarProperty Name="FK_Parent" ColumnName="FK_Parent" />
+                <ScalarProperty Name="FK_User" ColumnName="FK_User" />
+                <ScalarProperty Name="SEO_KeyWords" ColumnName="SEO_KeyWords" />
+                <ScalarProperty Name="SEO_Description" ColumnName="SEO_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="FK_Type" ColumnName="FK_Type" />
+                <ScalarProperty Name="FK_User" ColumnName="FK_User" />
+                <ScalarProperty Name="SEO_KeyWords" ColumnName="SEO_KeyWords" />
+                <ScalarProperty Name="SEO_Description" ColumnName="SEO_Description" />
+                <ScalarProperty Name="FK_Status" ColumnName="FK_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostType">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.PostType">
+              <MappingFragment StoreEntitySet="PostType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.Tags">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagsInPosts">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.TagsInPosts">
+              <MappingFragment StoreEntitySet="TagsInPosts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FK_Tag" ColumnName="FK_Tag" />
+                <ScalarProperty Name="FK_Posts" ColumnName="FK_Posts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="FormWorkArchitectsModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="FormWorkArchitectsModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

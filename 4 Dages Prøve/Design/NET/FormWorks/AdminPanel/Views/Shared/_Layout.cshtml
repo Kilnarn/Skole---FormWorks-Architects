@@ -1,0 +1,94 @@
+﻿@using Prototyping.Ipsum;
+@using Prototyping.Placeholdit; 
+   
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title - Form Works Architects</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @Styles.Render("~/Content/css")
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="ProfileWrapper">
+                <section class="ProfileAvatar">
+                    <div class="AvatarImage">@Html.Placehold(25,25)</div>
+                    <div class="AvatartName"><a href="#">Thomas Boeriis</a></div>
+                </section>
+            </div>
+            <nav class="sideNav">
+                <ul>
+                    <li class="label"><label>Site</label></li>
+                    <li class="active"><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                    <li><a href="#"><i class="fa fa-files-o"></i>Pages</a></li>
+                    <li><a href="#"><i class="fa fa-picture-o"></i>Media</a></li>
+                    <li><a href="#"><i class="fa fa-hdd-o"></i>Projects</a></li>
+                    <li><a href="#"><i class="fa fa-file-text-o"></i>News</a></li>
+                    <li><a href="#"><i class="fa fa-users"></i>Users</a></li>
+                    <li><a href="#"><i class="fa fa-gears"></i>Settings</a></li>
+                </ul>
+                <ul>
+                    <li class="label"><label>Personal</label></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i>Messages</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                    <li><a href="#"><i class="fa fa-bar-chart-o"></i>Analytics</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="content">
+            <div class="contentNav">
+                <div class="row">
+                    <div class="large-12 columns alpha">
+                        <nav class="topNav">
+                            <section class="right">
+                                        @Html.Partial("_LoginPartial")
+                            </section>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-plus"></i>Add New</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-check-square-o"></i>Select All</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-trash-o"></i>Delete Selected</a></li>
+                                <li class="divider"></li>
+                            </ul>
+                    
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    @RenderSection("featured", required: false)
+                    <section>
+                        @RenderBody()
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/foundation")
+    <script>
+        $(document).foundation();
+    </script>
+    @*Use the Scripts section to define page specific scripts*@
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
