@@ -4,7 +4,7 @@
 $include-html-type-classes: $include-html-classes !default;
 
 // We use these to control header font styles
-$header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
+$header-font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !default;
 $header-font-weight: bold !default;
 $header-font-style: normal !default;
 $header-font-color: #222 !default;
@@ -60,7 +60,7 @@ $hr-border-color: #ddd !default;
 $hr-margin: emCalc(20) !default;
 
 // We use these to style lists
-$list-style-position: outside !default;
+$list-style-position: inside !default;
 $list-side-margin: 0 !default;
 $list-nested-margin: emCalc(20) !default;
 $definition-list-header-weight: bold !default;

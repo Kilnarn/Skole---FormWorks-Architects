@@ -15,7 +15,6 @@
 
     <title>@ViewBag.Title - Form Works Architects</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     @Styles.Render("~/Content/css")
 
@@ -55,7 +54,7 @@
                 <div class="row">
                     <div class="large-12 columns alpha">
                         <nav class="topNav">
-                            <section id="login" class="right">
+                            <section class="right">
                                         @Html.Partial("_LoginPartial")
                             </section>
                             <ul>
@@ -64,22 +63,21 @@
                                 <li><a href="#"><i class="fa fa-check-square-o"></i>Select All</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#"><i class="fa fa-trash-o"></i>Delete Selected</a></li>
-                                <li class="divider hide-for-medium-down"></li>
+                                <li class="divider"></li>
                             </ul>
                     
                         </nav>
                     </div>
                 </div>
             </div>
-            
-            <div class="contentHolder">
-                @RenderSection("featured", required: false)
-                    
-                @RenderBody()
-            </div>  
-                    
-                
-            
+            <div class="row">
+                <div class="large-12 columns">
+                    @RenderSection("featured", required: false)
+                    <section>
+                        @RenderBody()
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 
