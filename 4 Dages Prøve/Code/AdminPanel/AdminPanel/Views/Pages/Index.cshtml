@@ -1,0 +1,97 @@
+﻿@using DA;
+@model IEnumerable<DA.Pages>
+
+@{
+    ViewBag.Title = "Pages";
+}
+
+@section ContentMenu {
+
+    <ul>
+        <li><a href="@Url.Action("Create")"><i class='fa fa-plus'></i> Create New</a></li>
+        <li class="divider"></li>
+        <li class="hide-for-small"><a href="#" id="Selector"><i class="fa fa-check-square-o"></i>Select All</a></li>
+        <li class="divider hide-for-small"></li>
+        <li class="hide-for-small"><a href="#" onclick="if(!confirm('Delete selected?')) return false;"><i class="fa fa-trash-o"></i>Delete Selected</a></li>
+        <li class="divider hide-for-medium-down"></li>
+    </ul>
+}
+<div class="row">
+    <div class="large-12 columns add-top">
+        <div class="contentBox orange">
+            <div class="contentHeader">
+                <h2>@ViewBag.Title</h2>
+            </div>
+            <div class="innerContent">
+               
+                <table id="ViewTable" class="fulltable">
+                    <tr>
+                        <th  class="hide-for-small"></th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th class="hide-for-small">Created Date</th>
+                        <th class="hide-for-small">Author</th>
+                        <th>Action</th>
+                    </tr>
+                  
+                    
+
+                    @foreach (var item in Model.OrderBy(p  => p.SortIndex).ToList()) {
+
+                        string space = "";
+                        for(int i = 0; i < item.indentlevel; i++) {
+                            space = (item.indentlevel * 20) +"px";   
+                        }
+                                                
+                        <tr>
+                            <td class="checkbox hide-for-small"><input type="checkbox" /></td>
+                            <td>
+                                <a style="margin-left:@space" href="@Url.Action("Edit", new { id=item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status.Name)
+                            </td>
+                            <td  class="hide-for-small">
+                                @String.Format("{0}", item.CreatedDate.ToString("ddd dd-MM-yyyy"))
+                            </td>
+                            <td  class="hide-for-small">
+                                @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+                            </td>
+                            <td class="actionControls">
+                                <div class="actions">
+                                    <a href="#" class="handle"><i class="fa fa-arrows"></i></a>
+                                    <a href="@Url.Action("Edit", new { id=item.Id })"><i class="fa fa-pencil"></i> Edit</a>
+                                    <a href="@Url.Action("Delete", new { id=item.Id })" onclick="if(!confirm('Delete?')) return false;"><i class="fa fa-trash-o"></i> Delete</a>                                    
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var checked = false;
+            $('#Selector').click(function (e) {
+                var table = $("#ViewTable");
+                if (checked == false) {
+                    $('td input:checkbox', table).attr('checked', "checked");
+                    checked = true;
+                }else{
+                    $('td input:checkbox', table).attr('checked', null);
+                    checked = false;
+                }
+            });
+
+            
+            $("#ViewTable tbody").sortable({ handle: '.handle' });
+            $("#ViewTable tr").disableSelection();
+            
+        });
+    </script>
+
+}

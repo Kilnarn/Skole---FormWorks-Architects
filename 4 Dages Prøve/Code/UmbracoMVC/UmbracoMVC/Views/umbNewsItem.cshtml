@@ -1,0 +1,86 @@
+@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+    
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // If the editor has not explicitly set the publishDate property then show the create date
+    var dateTime = CurrentPage.PublishDate == default(DateTime)
+        ? CurrentPage.CreateDate
+        : CurrentPage.PublishDate;
+}
+<!-- Main -->
+<div class="collumn-2-layout">
+    <div class="header">
+    
+        @{ Html.RenderPartial("MiniHero"); }
+    </div>
+    <section class="darkgrey newsitem">
+        <div class="row">
+            <div class="large-9 columns">
+                <header>
+                    <h2 class="title">@pageTitle</h2>
+                </header>
+                    <article>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <p><span class="datetime">@dateTime.ToString("f")</span></p>
+                                        
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        @if (string.IsNullOrWhiteSpace(CurrentPage.Image.ToString()) == false)
+                                        {
+                                            string[] images = CurrentPage.Image.ToString().Split(',');
+                                        <div class="row">
+                                            <div class="large-12 columns">
+                                                <div class="cycle-slideshow" data-cycle-prev="#prev" data-cycle-next="#next" data-cycle-speed="500">
+                                                
+                                                    
+
+                                                    @foreach (string img in images)
+                                                    {
+                                                        <img src="@Umbraco.Media(int.Parse(img)).umbracoFile"  id="@img" />
+
+                                                    }
+
+                                                
+                                                </div>
+                                                <div class="center controls">
+                                                    <a href=# id="prev"><i class="fa fa-chevron-circle-left fa-2x"></i></a> 
+                                                    <a href=# id="next"><i class="fa fa-chevron-circle-right fa-2x"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                        <article>
+                                         @CurrentPage.BodyText
+                                        </article>
+                                        
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </article>
+                    
+            </div>
+            <div class="large-3 columns">
+                <div class="row">
+                    <div class="large-12 columns"> 
+                        @{ Html.RenderPartial("umbFeatures"); }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns"> 
+                        @{ Html.RenderPartial("umbLatestNewsWidget"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

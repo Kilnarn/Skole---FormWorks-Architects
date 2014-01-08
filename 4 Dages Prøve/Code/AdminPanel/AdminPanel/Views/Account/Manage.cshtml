@@ -1,0 +1,40 @@
+﻿@model AdminPanel.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+@section ContentMenu {
+    <ul>
+        <li><a href="@Url.Action("Index","Dashboard")"><i class='fa fa-backward'></i> Back To Dashboard</a></li>
+        <li class="divider"></li>
+    </ul>
+}
+
+<div class="row">
+    <div class="large-6 large-centered columns">
+        <div class="row">
+            <p class="message-success">@ViewBag.StatusMessage</p>
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns add-top">
+                <div class="contentBox green">
+                    
+                   @if (ViewBag.HasLocalPassword)
+                        {
+                            @Html.Partial("_ChangePasswordPartial")
+                        }
+                        else
+                        { 
+                            @Html.Partial("_SetPasswordPartial")
+                        }
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

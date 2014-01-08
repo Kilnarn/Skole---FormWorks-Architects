@@ -1,0 +1,45 @@
+﻿@model DA.GetInformation
+
+@using (Html.BeginForm("CreaQuickNews", "News", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="large-12 columns add-top">
+        <div class="contentBox orange">
+            <div class="contentHeader">
+                <h2>Write Quick News</h2>
+            </div>
+            <div class="innerContent">
+                <form>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            
+
+                            @Html.TextBoxFor(model => model.NewsPosts.Name, new { @placeholder = "Enter Title here" })
+                            @Html.ValidationMessageFor(model => model.NewsPosts.Name)
+                            
+                        </div>
+                        <div class="large-12 columns">
+                            @Html.TextAreaFor(model => model.NewsPosts.Body, new { @placeholder = "Put Content Here" })
+                            @Html.ValidationMessageFor(model => model.NewsPosts.Body)
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            @Html.TextBoxFor(model => model.NewsPosts.tags, new { @placeholder = "Tags (Speerate with commas)" })
+                            @Html.ValidationMessageFor(model => model.NewsPosts.tags)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="right">
+                            <div class="large-4 columns">
+                                <input type="submit" class="submitbutton orange" value="Publish" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

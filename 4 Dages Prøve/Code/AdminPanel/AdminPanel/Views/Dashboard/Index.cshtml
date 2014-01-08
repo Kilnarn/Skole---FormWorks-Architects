@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    
+}
+@section ContentMenu {
+    <ul>
+        <li><a href="#" data-dropdown="AddNew"><i class="fa fa-plus"></i>Add New</a></li>
+        <li class="divider"></li>
+    </ul>
+    <ul id="AddNew" class="f-dropdown content" data-dropdown-content>
+        <li><a href="@Url.Action("Create", "Pages")"><i class="fa fa-files-o"></i> Page</a></li>
+        <li><a href="@Url.Action("Create", "Media")"><i class="fa fa-picture-o"></i> Media</a></li>
+        <li><a href="@Url.Action("Create", "News")"><i class="fa fa-file-text-o"></i> News</a></li>
+        <li><a href="@Url.Action("Create", "Projects")"><i class="fa fa-hdd-o"></i> Project</a></li>
+        <li><a href="@Url.Action("Create", "Users")"><i class="fa fa-users"></i> User</a></li>
+    </ul>
+}
+<div class="row">
+    <div class="large-6 columns">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="contentBox add-top blue">
+                    <div class="contentHeader intro">
+                        <h2>Hello, Thomas Boeriis</h2>
+                        <span class="quote">“life is just a loop, eat sleep rave reapeat -fatboy slim”</span>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_RightnowInfo")
+        </div>
+        
+
+    </div>
+    <div class="large-6 columns">
+        <div class="row">
+            @Html.Partial("_WriteQuickNews")
+        </div>
+
+    </div>
+    
+</div>
+

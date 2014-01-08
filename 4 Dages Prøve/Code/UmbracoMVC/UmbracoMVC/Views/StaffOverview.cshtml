@@ -1,0 +1,96 @@
+﻿@using umbraco.MacroEngines
+@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var StaffOverviews = homePage.StaffOverview.First();
+
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    var StaffMembers = CurrentPage.StaffMember;
+
+}
+
+
+<!-- Main -->
+<div class="collumn-2-layout">
+    <div class="header">
+    
+        @{ Html.RenderPartial("MiniHero"); }
+    </div>
+    <section class="darkgrey staff">
+        <div class="row">
+            <div class="large-9 columns">
+                <header>
+                    <h2 class="title">@pageTitle</h2>
+                </header>
+                <div class="row">
+                    <ul class="large-block-grid-4 small-block-grid-3 staffmembers">
+                        @foreach (var item in StaffMembers)
+                        {
+                    
+                            // If the editor has not explicitly provided the "Page title" property page 
+                            // then just show the name of the page otherwise show the provided title
+                            var title = string.IsNullOrWhiteSpace(item.Title)
+                                ? item.Name
+                                : item.Title;
+
+                            // If the editor has not explicitly set the publishDate property then show the create date
+                            var dateTime = item.PublishDate == default(DateTime) 
+                                ? item.CreateDate 
+                                : item.PublishDate;
+
+                            string content = library.StripHtml(item.BodyText.ToString());
+                
+                        
+                            <li>
+                                <h4>@title</h4>        
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        
+                                        <div class="imageholder">
+                                            <img src="@Umbraco.Media(item.Image).umbracoFile" />
+                                        </div>
+                                        <p> 
+                                            @Umbraco.Truncate(content, 200)<br />
+                                            <a href="tel:@item.PhoneNumber">Tlf: @item.PhoneNumber</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="large-3 columns">
+                <div class="row">
+                    <div class="large-12 columns"> 
+                        @{ Html.RenderPartial("umbFeatures"); }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns"> 
+                         @{ Html.RenderPartial("umbLatestNewsWidget"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,22 @@
+﻿@model DA.GetInformation
+
+<div class="large-12 columns">
+    <div class="contentBox blue">
+        <div class="contentHeader">
+            <h2>Right Now</h2>
+        </div>
+        <div class="innerContent">
+            <ul class="collumn2 list no-bull">
+                <li><span class="number">@Model.GetPosts.Count()</span> Posts</li>
+                <li><span class="number">@Model.GetPages.Count()</span> Pages</li>
+                <li><span class="number">@Model.GetCateGories.Count()</span> Categories</li>
+                <li><span class="number">@Model.GetTags.Count()</span> Tags</li>
+
+                <li><span class="number">3</span> <span class="blue">Comments</span></li>
+                <li><span class="number">10</span> <span class="green">Approved</span></li>
+                <li><span class="number">7</span> <span class="purple">Pending</span></li>
+                <li><span class="number">0</span> <span class="orange">Spam</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

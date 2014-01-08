@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DA.Pages>
+
+
+@{
+    foreach (var item in Model.OrderBy(p  => p.SortIndex).ToList()) { 
+    {
+        
+         <tr>
+            <td class="checkbox hide-for-small"><input type="checkbox" /></td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+            <td  class="hide-for-small">
+                @String.Format("{0}", item.CreatedDate.ToString("ddd dd-MM-yyyy"))
+            </td>
+            <td  class="hide-for-small">
+                @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+            </td>
+            <td class="actionControls">
+                <div class="actions">
+                    <a href="#"><i class="fa fa-arrows"></i></a>
+                    <a href="@Url.Action("Edit", new { id=item.Id })"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="@Url.Action("Delete", new { id=item.Id })" onclick="if(!confirm('Delete?')) return false;"><i class="fa fa-trash-o"></i> Delete</a>                                    
+                </div>
+            </td>
+        </tr>
+        
+         
+        if (Model.Where(p => p.FK_Parent == item.Id).OrderBy(p => p.SortIndex).ToList().Count() > 0) 
+        {
+            Html.RenderPartial("BuildPagesHierarchy", item.Children, ViewData);
+        }
+        
+    } 
+}

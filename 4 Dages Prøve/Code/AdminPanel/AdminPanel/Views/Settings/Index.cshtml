@@ -1,0 +1,95 @@
+﻿@model DA.General
+
+@{
+    ViewBag.Title = "Settings";
+}
+@section ContentMenu {
+
+    <ul>
+        <li><a href="@Url.Action("Index", "Dashboard")"><i class='fa fa-backward'></i>Back to Dashboard</a></li>
+        <li class="divider hide-for-medium-down"></li>
+    </ul>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor( model => model.Id)
+    <div class="row">
+        <div class="large-8 columns add-top">
+            <div class="contentBox purple">
+                <div class="contentHeader">
+                    <h2>@ViewBag.Title</h2>
+                </div>
+                <div class="innerContent">
+
+                    @if(ViewBag.ErrorMessage != null) {
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div data-alert class="alert-box alert">
+                                @ViewBag.ErrorMessage
+                                <a href="#" class="close">&times;</a>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <div class="row">
+                        <div class="large-12 columns">
+                            @Html.LabelFor(model => model.SiteName, "Site Name")
+
+                            @Html.EditorFor(model => model.SiteName)
+                            @Html.ValidationMessageFor(model => model.SiteName)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            @Html.LabelFor(model => model.Email, "Site Email")
+
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            @Html.LabelFor(model => model.Phone, "Company Phone")
+
+                            @Html.EditorFor(model => model.Phone)
+                            @Html.ValidationMessageFor(model => model.Phone)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            @Html.LabelFor(model => model.Address, "Company Address")
+
+                            @Html.EditorFor(model => model.Address)
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="large-6 columns">
+                            @Html.LabelFor(model => model.City.ZipCode, "Zip Code")
+
+                            @Html.TextBoxFor(model => model.City.ZipCode)
+                            @Html.ValidationMessageFor(model => model.City.ZipCode)
+                        </div>
+                        
+                        <div class="large-6 columns">
+                            @Html.LabelFor(model => model.City.CityName, "City Name")
+                            @Html.TextBoxFor(model => model.City.CityName, new { @disabled="disabled" })
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+
+                        <div class="large-12 columns">
+                            <input type="submit" class="submitbutton right" value="@ViewBag.SubmitButton" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

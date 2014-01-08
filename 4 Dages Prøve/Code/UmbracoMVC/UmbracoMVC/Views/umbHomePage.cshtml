@@ -1,0 +1,150 @@
+@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+}
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.umbNewsOverviews.First();
+    
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    // Finally, take the first 5 items to show in the news overview
+    var newsItems = newsOverview.umbNewsItems.OrderBy("publishDate desc, createDate desc").Take(2);
+
+    var infoOverview = homePage.QuickInfoOverview.First();
+}
+
+<!-- Hero Section -->
+<section class="FluidHero">
+    @{ Html.RenderPartial("Hero"); }
+    
+</section>
+    
+<!-- WhatWeDo Section -->
+<section class="row WhatWeDo">
+    <div class="large-12 columns">
+        <h3 class="center text-center">Vi kan tilbyde design af alle former for bygninger,<br />lige fra nye til renovering af gamle lejligheder.</h3>
+    </div>
+    <div class="large-12 columns">
+    <div class="row">
+
+        @foreach (var item in infoOverview.Children)
+        {
+
+            
+            <div class="large-3 columns">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div class="round circleframe">
+                            <i class="fa @item.fontIcon fa-5x"></i>
+                        </div>
+                    </div>
+                    <div class="large-12 columns">
+                        
+                            @item.bodyText
+                        
+                    </div>
+                </div>
+            </div>
+        }
+     
+    </div>
+    </div>
+</section>
+    
+<!-- News Section -->
+<section class="news darkgrey">
+    <div class="row">
+        @{int itemi = 0; }
+        @foreach (dynamic item in newsItems)
+        {
+                
+            var title = string.IsNullOrWhiteSpace(item.Title)
+            ? item.Name
+            : item.Title;
+
+            string content = library.StripHtml(item.BodyText.ToString());
+            IHtmlString contenttext = null;
+            if (content.Length > 175)
+            {
+                contenttext = Umbraco.Truncate(content, 175, true, false);
+            }
+            else
+            {
+                contenttext = Umbraco.Truncate(content, content.Length, true, false);
+            }
+            
+            string[] images = {"none"};
+            if (string.IsNullOrWhiteSpace(item.Image.ToString()) == false)
+            {
+                images = item.Image.ToString().Split(',');
+            }
+            
+            if(itemi == 0) {
+                itemi++;
+                <div class="large-12 columns">
+                    <div class="row newsItem">
+                        <div class="large-6 columns">
+                            <div class="imageholder"><a href="@item.Url">
+                                @if(images[0] != "none") {
+                                    <img src="@Umbraco.Media(int.Parse(images[0])).umbracoFile">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/News1.png" />
+                                }
+                                </a></div>
+                        </div>
+                        <div class="large-6 columns">
+                        <h4>@title</h4>
+                        <p>@contenttext <a href="@item.Url">[+]Læs mere</a></p>
+                                
+                        </div>
+                    </div>
+                </div>
+                    
+            }else{
+                itemi = 0;
+                <div class="large-12 columns">
+                <div class="row newsItem">
+                        
+                    <div class="large-6 columns">
+                    <h4>@title</h4>
+                        <p>@contenttext <a href="@item.Url">[+]Læs mere</a></p>
+                    </div>
+                    <div class="large-6 columns">
+                        <div class="imageholder">
+                            <a href="@item.Url">
+                                @if(images[0] != "none") {
+                                    <img src="@Umbraco.Media(int.Parse(images[0])).umbracoFile">
+                                }else{
+                                    <img src="~/Content/images/News1.png" />
+                                }
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+                    
+            }
+        }
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="small-6 columns large-centered small-centered buttonfield">
+                    <a href="/Nyheder" class="button round alert">Vis Alle Nyheder</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<!-- /Main -->

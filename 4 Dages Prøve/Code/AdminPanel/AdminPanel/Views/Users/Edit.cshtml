@@ -1,0 +1,148 @@
+﻿@model DA.UserProfile
+
+@{
+    ViewBag.Title = "Edit";
+}
+@section ContentMenu {
+
+    <ul>
+        <li><a href="@Url.Action("Index")"><i class='fa fa-backward'></i> Back To List</a></li>
+        <li class="divider"></li>
+        <li><a href="@Url.Action("Delete", new { id= Model.UserId })" onclick="if(!confirm('Delete?')) return false;"><i class="fa fa-trash-o"></i>Delete</a></li>
+        <li class="divider hide-for-medium-down"></li>
+    </ul>
+}
+
+@using (Html.BeginForm()) {
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+@Html.HiddenFor(model => model.UserId)
+
+    @ViewBag.ErrorMessage
+<div class="row">  
+    <div class="large-9 columns add-top">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="contentBox blue">
+                    <div class="contentHeader">
+                        <h2>User</h2>
+                    </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                    @Html.LabelFor(model => model.UserName, "User Name")
+
+                                    @Html.EditorFor(model => model.UserName)
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="large-6 columns">
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                    @Html.LabelFor(model => model.Password, "Password")
+
+                                    @Html.PasswordFor(model => model.Password, new { @disabled = "disabled=" })
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="large-12 columns">
+                <div class="contentBox orange">
+                    <div class="contentHeader">
+                        <h2>Personal Information</h2>
+                    </div>
+                    <div class="innerContent">
+                        <div class="row">
+                            <div class="large-12 columns">
+                            @Html.LabelFor(model => model.FirstName, "First Name")
+
+                            @Html.EditorFor(model => model.FirstName)
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <div class="large-12 columns">
+                            @Html.LabelFor(model => model.LastName, "Last Name")
+
+                            @Html.EditorFor(model => model.LastName)
+                            @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                            @Html.LabelFor(model => model.Email, "Email")
+
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="large-3 columns add-top">
+        <div class="row">
+             <div class="large-12 columns">
+                <div class="contentBox purple">
+                    <div class="contentHeader">
+                        <h2>Role assignment</h2>
+                    </div>
+                    <div class="innerContent">
+                        <div class="row">
+                            <div class="large-12 columns">
+                            <label>Assign a role to the user. Leave blank if stanard user</label><br />
+                            @*@Html.LabelFor(model => model.FirstName, "First Name")
+
+                            @Html.EditorFor(model => model.FirstName)
+                            @Html.ValidationMessageFor(model => model.FirstName)*@
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="row">
+             <div class="large-12 columns">
+                <div class="contentBox green">
+                    <div class="contentHeader">
+                        <h2>Profile Image</h2>
+                    </div>
+                    <div class="innerContent">
+                        <div class="row">
+                            <div class="large-12 columns">
+                            @Html.LabelFor(model => model.FirstName, "Upload Image")
+
+                            @Html.TextBoxFor(m => m.FirstName, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div class="right"><input type="submit" class="submitbutton" value="Save" /></div>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

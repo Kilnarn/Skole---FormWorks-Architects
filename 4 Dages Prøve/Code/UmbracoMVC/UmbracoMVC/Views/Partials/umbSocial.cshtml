@@ -1,0 +1,34 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+}
+
+<!-- Contact -->
+<section>
+    <h3></h3>
+    <ul class="socialcontact">
+        @RenderLinkIfNotEmpty(homePage.FacebookLink, "facebook", "facebook")
+        @RenderLinkIfNotEmpty(homePage.TwitterLink, "twitter", "twitter")
+        @RenderLinkIfNotEmpty(homePage.RssLink, "rss", "RSS")
+        @RenderLinkIfNotEmpty(homePage.DribbbleLink, "dribbble", "dribble")
+        @RenderLinkIfNotEmpty(homePage.LinkedinLink, "linkedin", "linkedin")
+        @RenderLinkIfNotEmpty(homePage.GoogleLink, "googleplus", "google-plus")
+    </ul>
+</section>
+<!-- /Contact -->
+
+@helper RenderLinkIfNotEmpty(dynamic link, string cssClass, string linkName)
+{
+    // A helper function is handy when you have to do the same thing over and over again
+    // So now we only have to write the "if" check and list item once, and we only need
+    // to put in the things that can vary
+    
+    if (string.IsNullOrEmpty(link) == false)
+    {
+        <li class="@cssClass"><a href="@link" class="@cssClass"><i class="fa fa-@linkName"></i></a></li>
+    }
+}

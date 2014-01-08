@@ -1,0 +1,85 @@
+@import "fonts";
+
+body { 
+    margin:0;
+	background-color:#00bff3;
+}
+
+a { text-decoration:none; }
+
+
+/*Preloader*/
+#preloader {
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:100%;
+	
+	#preloader-container {
+		position:absolute;
+		left:50%;
+		top:50%;
+		
+		#preloader-banner {
+			position:relative;
+			left:-50%;
+			margin-top:-115px;
+			width:600px;
+			height:230px;
+			
+			#preloader-left {
+				position:absolute;
+				left:0;
+				top:0;
+				width:80px;
+				height:230px;
+				background:#8edd67;
+				
+			}
+			#preloader-right {
+				position:absolute;
+				top:0;
+				left:520px;
+				height:230px;
+				width:80px;			
+				background:#8edd67;
+			}
+			#preloader-middle {
+				position:absolute;
+				left:80px;
+				height:190px;
+				width:440px;
+				background:#8edd67;
+				
+				#text {
+					
+					font-family: frankfurter-plain;
+					color: #ffffff;
+					font-size: 72px;
+					text-align: center;
+					margin-top: 29px;	
+				}
+			}
+		}
+	}
+}
+
+/*Content*/
+.content-noscroll
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/*Container*/
+#container {
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+} 

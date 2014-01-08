@@ -1,0 +1,157 @@
+﻿@model DA.Media
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@section ContentMenu {
+
+    <ul>
+        <li><a href="@Url.Action("Index")"><i class='fa fa-backward'></i> Back To List</a></li>
+        <li class="divider"></li>
+        <li><a href="#" onclick="document.forms[1].submit();"><i class="fa fa-floppy-o"></i>Save</a></li>
+        <li class="divider"></li>
+    </ul>
+}
+<div class="row">
+      
+    @using (Html.BeginForm("Create", "Media", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+    @Html.HiddenFor(model => model.Id)
+    <div class="large-9 columns add-top">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="contentBox orange">
+                    <div class="contentHeader">
+                <h2>@ViewBag.Title</h2>
+            </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-6 columns">
+                                @Html.LabelFor(model => model.Name, "Title")
+
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                            <div class="large-6 columns">
+                                @Html.LabelFor(model => model.File, "Upload New File")
+
+                                <input name="File" id="File" class="" type="file"/>                                
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.Caption, "Caption")
+
+                                @Html.EditorFor(model => model.Caption)
+                                @Html.ValidationMessageFor(model => model.Caption)
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="large-12 columns">
+                <div class="contentBox green">
+                    <div class="contentHeader">
+                        <h2>Search Engine Optimize</h2>
+                    </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_KeyWords, "SEO Keywords")
+
+                                @Html.EditorFor(model => model.SEO_KeyWords)
+                                @Html.ValidationMessageFor(model => model.SEO_KeyWords)
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_Description, "SEO Description")
+
+                                @Html.TextAreaFor(model => model.SEO_Description)
+                                @Html.ValidationMessageFor(model => model.SEO_Description)
+                            </div>
+                        </div>   
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+        
+    <div class="large-3 columns add-top">
+        <div class="contentBox purple">
+            <div class="contentHeader">
+                <h2>Status</h2>
+            </div>
+            <div class="innerContent">
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        
+                        @Html.LabelFor(model => model.DateCreated,"Date Created")
+
+                        @Html.TextBoxFor(model => model.DateCreated , new { @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.DateCreated)
+                        
+                    </div>
+                </div>   
+                
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.Height, "Height")
+
+                        @Html.TextBoxFor(model => model.Height, new { @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Height)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.Width, "Width")
+
+                        @Html.TextBoxFor(model => model.Width, new { @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Width)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.FileType.Name, "File Type")
+
+                        @Html.TextBoxFor(model => model.FileType.Name, new { @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.FileType.Name)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <input type="submit" class="submitbutton right" value="Save" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

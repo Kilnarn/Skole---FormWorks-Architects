@@ -1,0 +1,51 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var newsOverview = homePage.umbNewsOverviews.First();
+    
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    // Finally, take the first 5 items to show in the news overview
+    var newsItems = newsOverview.umbNewsItems.OrderBy("publishDate desc, createDate desc").Take(5);
+}
+
+<h3 class="major">Seneste Nyheder</h3>
+
+<!-- Archives -->
+<div class="lastnews">
+@foreach (var newsItem in newsItems)
+{
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var title = string.IsNullOrWhiteSpace(newsItem.Title) 
+        ? newsItem.Name
+        : newsItem.Title;
+
+    // If the editor has not explicitly set the publishDate property then show the create date
+    var dateTime = newsItem.PublishDate == default(DateTime) 
+        ? newsItem.CreateDate
+        : newsItem.PublishDate;
+
+    <div class="row">
+        <div class="large-12 columns">
+            <h5 class="title"><a href="@newsItem.Url">@title</a></h5>
+            <span class="datetime small">@dateTime.ToString("f")</span>
+            <hr />
+        </div>
+        
+    </div>
+}
+    <div class="center">
+        <a href="@newsOverview.Url" class="button button-alt alert round center">Se Arkiv</a>
+    </div>
+</div>
+<!-- /Archives -->

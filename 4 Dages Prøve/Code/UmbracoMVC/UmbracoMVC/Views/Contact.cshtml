@@ -1,0 +1,67 @@
+﻿@using System.Web.Optimization;
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // If the editor has not explicitly set the publishDate property then show the create date
+    var dateTime = CurrentPage.PublishDate == default(DateTime)
+        ? CurrentPage.CreateDate
+        : CurrentPage.PublishDate;
+
+    var contact = new UmbracoMVC.Models.Contact();
+}
+<div class="collumn-2-layout">
+    <div class="header">
+    
+        @{ Html.RenderPartial("MiniHero"); }
+    </div>
+    <div class="darkgrey newsitem">
+        <div class="row">
+            <div class="large-12 columns mainContent">
+                <header>
+                    <h2 class="title">@pageTitle</h2>
+                </header>
+                <!-- Content! -->        
+                
+                <div class="row">
+                    <div class="large-9 columns">
+                        <h4>Sprøgsmål, eller har du en opgave du tror vi kan løse? Så skriv til os.</h4>
+                        @Html.Partial("ContactForm", contact)
+
+                        @if (TempData["status"] != null)
+                        {
+                            <div data-alert class="alert-box @TempData["Alert"]">
+                              <!-- Your content goes here -->
+                                @TempData["Status"]
+                              <a href="#" class="close">&times;</a>
+                            </div>
+                        }
+                    </div>
+		            <div class="large-3 columns">
+                        <div class="vcardTable">
+                            <h4>Adress:</h4>
+                            <div class="vcardRow">
+                                <div class="vcardCell">
+                                    <p>
+                                        @CurrentPage.adress<br />
+                                        @CurrentPage.zipCode @CurrentPage.city<br />
+                                        @CurrentPage.country</p>
+                                </div>
+                                <div class="vcardCell">
+                                    <p>Phone: @CurrentPage.phoneNumber<br />
+                                    Email: <a href="mailto:@CurrentPage.adress">@CurrentPage.email</a></p>
+                                </div>
+                            </div>
+                        </div>
+		            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

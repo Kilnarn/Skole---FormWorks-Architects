@@ -1,0 +1,159 @@
+﻿@model DA.Pages
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section ContentMenu {
+
+    <ul>
+        <li class="hide-for-small"><a href="@Url.Action("Index")"><i class='fa fa-backward'></i> Back To List</a></li>
+        <li class="divider hide-for-small"></li>
+        <li><a href="#" onclick="document.forms[1].submit();"><i class="fa fa-floppy-o"></i>Save</a></li>
+        <li class="divider hide-for-small"></li>
+        @if(Model.Status.Id == 1) {
+            <li class="hide-for-small"><a href="@Url.Action("Publish", new { id= Model.Id })"><i class="fa fa-key"></i>Unpublish</a></li>
+        }else{
+            <li class="hide-for-small"><a href="@Url.Action("Publish", new { id= Model.Id })"><i class="fa fa-unlock-alt"></i>Publish</a></li>
+        }
+        <li class="divider"></li>
+        <li><a href="@Url.Action("Delete", new { id= Model.Id })" onclick="if(!confirm('Delete?')) return false;"><i class="fa fa-trash-o"></i>Delete</a></li>
+        <li class="divider hide-for-medium-down"></li>
+    </ul>
+}
+<div class="row">
+    @using (Html.BeginForm("Edit", "Pages", FormMethod.Post, new { @class = "custom" })){
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+    @Html.HiddenFor(model => model.Id)
+    <div class="large-9 columns add-top">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="contentBox orange">
+                    <div class="contentHeader">
+                <h2>@ViewBag.Title</h2>
+            </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.Name, "Title")
+
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.Body)
+
+                                @Html.TextAreaFor(model => model.Body,new { @class = "TextareaBody" })
+                                @Html.ValidationMessageFor(model => model.Body)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="large-12 columns">
+                <div class="contentBox green">
+                    <div class="contentHeader">
+                        <h2>Search Engine Optimize</h2>
+                    </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_KeyWords, "SEO Keywords")
+
+                                @Html.EditorFor(model => model.SEO_KeyWords)
+                                @Html.ValidationMessageFor(model => model.SEO_KeyWords)
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_Description, "SEO Description")
+
+                                @Html.TextAreaFor(model => model.SEO_Description)
+                                @Html.ValidationMessageFor(model => model.SEO_Description)
+                            </div>
+                        </div>   
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="large-3 columns add-top">
+        <div class="contentBox purple">
+            <div class="contentHeader">
+                <h2>Status</h2>
+            </div>
+            <div class="innerContent">
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        
+                        @Html.LabelFor(model => model.CreatedDate)
+
+                        @Html.EditorFor(model => model.CreatedDate)
+                        @Html.ValidationMessageFor(model => model.CreatedDate)
+                        
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="large-12 columns">
+                        
+                        @Html.LabelFor(model => model.PageTemplate)
+
+                        
+                        @Html.DropDownList("PageTemplate")
+                        
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.FK_Status, "Status")
+
+                        @Html.DropDownList("FK_Status")
+                        @Html.ValidationMessageFor(model => model.FK_Status)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                            @Html.LabelFor(model => model.FK_Parent, "Parent page to")
+
+                            @Html.DropDownList("FK_Parent","No Parrent")
+                            @Html.ValidationMessageFor(model => model.FK_Parent)
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.SortIndex, "Sort order")
+
+                        @Html.EditorFor(model => model.SortIndex)
+                        @Html.ValidationMessageFor(model => model.SortIndex)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <input type="submit" class="submitbutton right" value="Save" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

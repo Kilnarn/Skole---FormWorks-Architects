@@ -1,0 +1,116 @@
+﻿@using umbraco.MacroEngines
+@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // Model.Content is the current page that we're on
+    // AncestorsOrSelf is all of the ancestors this page has in the tree
+    // (1) means: go up to level 1 and stop looking for more ancestors when you get there
+    // First() gets the first ancestor found (the home page, on level 1)
+    var homePage = CurrentPage.AncestorsOrSelf(1).First();    
+    
+    // Find all pages with document type alias umbNewsOverview
+    // We do that using the plural, umbNewsOverviews (note the extra "s" in the end)
+    // Then take the first one, as we know there will only be on news overview page
+    var GallerOverview = homePage.ProjectOverview.First();
+
+    // Similar to above: find all pages with document type umbNewsItem under the news overview page
+    // Then order them, first by publishDate (a property the editor can explicitly set on the news item)
+    // and then by createDate, which is set by Umbraco automatically when a page gets created.
+    var GalleryItems = GallerOverview.GalleryItem.OrderBy("publishDate desc, createDate desc");
+
+}
+<!-- Main -->
+<div class="collumn-2-layout">
+    <div class="header">
+    
+        @{ Html.RenderPartial("MiniHero"); }
+    </div>
+    <section class="darkgrey">
+        <div class="row">
+            <div class="large-9 columns">
+                <header>
+                    <h1>@pageTitle</h1>
+                </header>
+
+                @{int i = 0;}
+                @foreach (var item in GalleryItems)
+                {
+
+                    // If the editor has not explicitly provided the "Page title" property page 
+                    // then just show the name of the page otherwise show the provided title
+                    var title = string.IsNullOrWhiteSpace(item.Title) 
+                        ? item.Name 
+                        : item.Title;
+
+
+                    // If the editor has not explicitly set the publishDate property then show the create date
+                    var dateTime = item.PublishDate == default(DateTime) 
+                        ? item.CreateDate 
+                        : item.PublishDate;
+
+                    string someText = library.StripHtml(item.BodyText.ToString());
+                    
+                    <article>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div class="large-3 columns">
+                                    
+                                @if (string.IsNullOrWhiteSpace(item.images.ToString()) == false)
+                                {
+                                    string[] imageslist = item.images.ToString().Split(',');
+                                    int delay = i * 400;
+                                    i = i+1;
+                                        
+                                    <div class="row">
+                                        <div class="cycle-slideshow listviewcycle" data-cycle-speed="2000" data-cycle-manual-speed="100" data-cycle-delay="@delay" data-cycle-center-horz="true" data-cycle-center-vert="true">
+                                            
+                                            @foreach (string img in imageslist)
+                                            {
+                                               <img src="~/Helpers/Image.ashx?f=@Umbraco.Media(int.Parse(img)).umbracoFile&w=180"  id="item-@img" />
+                                            }
+                                                    
+                                        </div>
+                                    </div>      
+                                        
+                                        
+                                }
+                                </div>
+                                <div class="large-9 columns">
+                                    <h3><a href="@item.Url">@title</a></h3>        
+                                    <p><span class="datetime">@dateTime.ToString("f")</span></p>
+                                        
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <p> @Umbraco.Truncate(someText, 200) <a href="@item.Url">[+]Læs mere</a></p>
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                }
+            </div>
+            <div class="large-3 columns">
+                 @{ Html.RenderPartial("umbLatestNewsWidget"); }
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+    </script>
+}

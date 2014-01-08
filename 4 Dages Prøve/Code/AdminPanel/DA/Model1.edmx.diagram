@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bae433feaa64286b17b5fab0cd195df" Name="Diagram1">
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Categories" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.CategoriesInPosts" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.City" Width="1.5" PointX="7.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.FileType" Width="1.5" PointX="1.5" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.General" Width="1.5" PointX="10" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Media" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.MediaInPosts" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Pages" Width="1.5" PointX="5.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Posts" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.PostType" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Status" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.Tags" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.TagsInPosts" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.UserProfile" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.webpages_Membership" Width="1.5" PointX="7.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormWorkArchitectsModel.webpages_Roles" Width="1.5" PointX="1.5" PointY="24.625" IsExpanded="true" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Categories_PostType" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_CategoriesInPosts_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_CategoriesInPosts_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_General_City1" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Media_FileType" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Media_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_MediaInPosts_Media" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Pages_Media" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_UserProfile_Media" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_MediaInPosts_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Pages_Pages" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Pages_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Pages_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Posts_PostType" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Posts_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_Posts_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_TagsInPosts_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.FK_TagsInPosts_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="FormWorkArchitectsModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

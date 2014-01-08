@@ -1,0 +1,97 @@
+﻿@inherits UmbracoTemplatePage
+@{
+    Layout = "umbLayout.cshtml";
+
+    // If the editor has not explicitly provided the "Page title" property page 
+    // then just show the name of the page otherwise show the provided title
+    var pageTitle = string.IsNullOrWhiteSpace(CurrentPage.Title)
+        ? CurrentPage.Name
+        : CurrentPage.Title;
+
+    // If the editor has not explicitly set the publishDate property then show the create date
+    var dateTime = CurrentPage.PublishDate == default(DateTime)
+        ? CurrentPage.CreateDate
+        : CurrentPage.PublishDate;
+}
+<!-- Main -->
+<div class="collumn-2-layout">
+    <div class="header">
+    
+        @{ Html.RenderPartial("MiniHero"); }
+    </div>
+    <section class="darkgrey newsitem">
+        <div class="row">
+            <div class="large-9 columns">
+                <header>
+                    <h2 class="title">@pageTitle</h2>
+                </header>
+                    <article>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <p><span class="datetime">@dateTime.ToString("f")</span></p>
+                                        
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <article>
+                                         @CurrentPage.BodyText
+                                        </article>
+                                        @if (string.IsNullOrWhiteSpace(CurrentPage.images.ToString()) == false)
+                                        {
+                                            string[] images = CurrentPage.images.ToString().Split(',');
+                                        <div class="row">
+                                            <div class="large-12 columns">
+                                                <div class="marsonycontainer">
+                                                    @foreach (string img in images)
+                                                    {
+                                                         <div class="item">
+                                                            @if (string.IsNullOrWhiteSpace(img.ToString()) == false)
+                                                            {           
+                                                                <a class="fancybox" href="@Umbraco.Media(int.Parse(img)).umbracoFile"><img src="@Umbraco.Media(int.Parse(img)).umbracoFile" /></a>
+                                                            }
+                                                        </div> 
+                                                    }
+                                                </div>                                        
+                                            </div>
+                                        </div>
+                                        }
+                                        
+                                        
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </article>
+                    
+            </div>
+            <div class="large-3 columns">
+                <div class="row">
+                    <div class="large-12 columns"> 
+                        @{ Html.RenderPartial("umbLatestNewsWidget"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    <script>
+    var $container = $('.marsonycontainer');
+    $container.imagesLoaded(function () {
+        $container.masonry({
+            itemSelector: '.item',
+            columnWidth: 240,
+            isAnimated: true,
+            animationOptions: {
+                duration: 500,
+                easing: 'linear',
+                queue: false
+            }
+        });
+    });
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+    </script>
+}

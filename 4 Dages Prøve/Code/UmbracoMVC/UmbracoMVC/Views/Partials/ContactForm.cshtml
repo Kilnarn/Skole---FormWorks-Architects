@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<UmbracoMVC.Models.Contact>
+@using System.Web.Optimization;
+<div id="status"></div>
+
+@using (Html.BeginUmbracoForm<UmbracoMVC.Controllers.ContactSurfaceController>("SendMail"))
+{
+     <fieldset>
+        <legend>Udfyld formen og vi vil kontakte dem inden længe.</legend>
+ 
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name) @Html.ValidationMessageFor(model => model.Name)
+ 
+        @Html.LabelFor(model => model.Email)
+        @Html.EditorFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email)
+ 
+        @Html.LabelFor(model => model.Message)
+        @Html.TextAreaFor(model => model.Message,new { @style = "height:150px" }) @Html.ValidationMessageFor(model => model.Message)<br />
+
+         @Html.HiddenFor(model => model.ToEmail)
+ 
+        <button type="submit" class="button round alert" ><i class="fa fa-envelope"></i> Send</button>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

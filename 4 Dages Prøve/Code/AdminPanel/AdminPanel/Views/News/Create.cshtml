@@ -1,0 +1,258 @@
+﻿@model DA.Posts
+
+@{
+    ViewBag.Title = "Create";
+}
+@section ContentMenu {
+
+    <ul>
+        <li><a href="@Url.Action("Index")"><i class='fa fa-backward'></i> Back To List</a></li>
+        <li class="divider"></li>
+        <li><a href="#" onclick="document.forms[1].submit();"><i class="fa fa-floppy-o"></i>Save</a></li>
+        <li class="divider hide-for-medium-down"></li>
+    </ul>
+}
+
+
+<div class="row">
+      
+    @using (Html.BeginForm("Create", "News", FormMethod.Post, new { @class = "custom" }))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+    <div class="large-9 columns add-top">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="contentBox orange">
+                    <div class="contentHeader">
+                <h2>@ViewBag.Title</h2>
+            </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.Name, "Title")
+
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.Body)
+
+                                @Html.TextAreaFor(model => model.Body, new { @class = "TextareaBody" })
+                                @Html.ValidationMessageFor(model => model.Body)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="large-12 columns">
+                <div class="contentBox green">
+                    <div class="contentHeader">
+                        <h2>Search Engine Optimize</h2>
+                    </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_KeyWords, "SEO Keywords")
+
+                                @Html.EditorFor(model => model.SEO_KeyWords)
+                                @Html.ValidationMessageFor(model => model.SEO_KeyWords)
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="large-12 columns">
+                                @Html.LabelFor(model => model.SEO_Description, "SEO Description")
+
+                                @Html.TextAreaFor(model => model.SEO_Description)
+                                @Html.ValidationMessageFor(model => model.SEO_Description)
+                            </div>
+                        </div>   
+
+                    </div>
+                </div>
+            </div>
+            <div class="large-12 columns">
+                <div class="contentBox blue">
+                    <div class="contentHeader">
+                        <h2>Media</h2>
+                    </div>
+                    <div class="innerContent">
+                
+                        <div class="row">
+                            <div class="large-12 columns mediacontainer" id="medias">
+                                <a href="#" data-reveal-id="AddImages" class="MediaContentHolder" data-reveal-ajax="false">Add Images</a>
+                            </div>
+                            <input type="hidden" id="imagestoadd" name="imagestoadd" />
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <div class="large-3 columns add-top">
+        <div class="contentBox purple">
+            <div class="contentHeader">
+                <h2>Status</h2>
+            </div>
+            <div class="innerContent">
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        @*
+                        @Html.LabelFor(model => model.CreatedDate)
+
+                        @Html.EditorFor(model => model.CreatedDate)
+                        @Html.ValidationMessageFor(model => model.CreatedDate)
+                        *@
+                    </div>
+                </div>   
+                
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.FK_Status, "Status")
+
+                        @Html.DropDownList("FK_Status", String.Empty)
+                        @Html.ValidationMessageFor(model => model.FK_Status)
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="large-12 columns">
+                        <input type="submit" class="submitbutton right" value="Save" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+        
+    <div class="large-3 columns ">
+        <div class="contentBox blue">
+            <div class="contentHeader">
+                <h2>Category</h2>
+            </div>
+            <div class="innerContent">
+                
+                <div class="row">
+                    <div class="large-12 columns">                        
+                        @foreach (var items in ViewBag.Categories)
+                        {
+                            <p>
+                            <label for="@items.Name">
+                                <input id="@items.Name" type="checkbox" name="Category" value="@items.Id" style="display:none;" />
+                                <span class="custom checkbox"></span> @items.Name
+                            </label>
+                            </p>
+                        }
+                        
+
+
+                    </div>
+                </div>                   
+            </div>
+        </div>
+    </div>
+    <div class="large-3 columns">
+        <div class="contentBox blue">
+            <div class="contentHeader">
+                <h2>Tags</h2>
+            </div>
+            <div class="innerContent">
+                <label>Add tags to make your post more likely to be found in a search. <br /><i>(Use commas to seperate)</i></label><br />
+                
+                <div class="row">
+                    <div class="large-12 columns">
+                        @Html.LabelFor(model => model.tags, "Tags")
+
+                        @Html.TextBoxFor(model => model.tags)
+                        @Html.ValidationMessageFor(model => model.tags)
+                    </div>
+                </div>                   
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+
+<div id="AddImages" class="reveal-modal large no padding">
+    <div class="contentBox purple">
+        <div class="contentHeader">
+            <h2>Find Image</h2>
+            <a class="close-reveal-modal right">&#215;</a>
+        </div>
+        <div class="SubcontentHeader">
+            <ul class="nolist">
+                <li><a href="#">Upload Files</a></li>
+                <li><a href="#">Media Libiary</a></li>
+            </ul>
+        </div>
+        <div class="innerContent">
+
+            <div class="row">
+                <div id="selectable" class="large-12 columns mediapicker">
+                        
+                    @foreach (var items in ViewBag.Media)
+                    {
+                        <div class="MediaHolder" id="@items.Id">
+                            <div class="innerimage">
+                                <img src="~/Content/Media/@items.Path" />
+                            </div>
+                        </div>
+                        
+                    }
+                    
+                </div> 
+            </div>
+        </div>                   
+    </div>
+    <div class="modalfooter">
+        
+        <button id="PickImages" class="submitbutton right clearfix"> Pick Image</button>
+        
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/masonry.pkgd.min.js"></script>
+    <script>
+        $(function () {
+            var imagepaths = new Array();
+            $("#selectable").selectable({
+                filter: "div",
+                stop: function () {
+                    var itemstoadd = "";
+                    imagepaths = [];
+                    var result = $("#select-result").empty();
+                    $(".ui-selected", this).each(function () {
+
+                        itemstoadd = itemstoadd + $(this).attr('id') + ",";
+                        imagepaths.push({ path: $(this).children().children("img").attr('src'), ID: $(this).attr('id') });
+                    });
+                    console.log(itemstoadd);
+
+                    $("#PickImages").click(function () {
+                        $('#imagestoadd').val(itemstoadd);
+                        $('.MediasInItem').remove();
+                        for (i = 0; i < imagepaths.length; i++) {
+                            $("#medias").append("<div class='MediasInItem' id='media-" + imagepaths[i].ID + "'><div class='innerimage'><img src='" + imagepaths[i].path + "' /></div></div>");
+                        }
+                        $('#AddImages').foundation('reveal', 'close');
+
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}
